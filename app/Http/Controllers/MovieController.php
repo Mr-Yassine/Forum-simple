@@ -14,7 +14,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        $listes = Movie::all();
+        return view('movie.index', ['movies' => $listes]);
     }
 
     /**
@@ -24,7 +25,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return view('movie.create');
     }
 
     /**
@@ -35,7 +36,18 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $movie = new Movie();
+
+        $file = $request->image;
+        $ext = $file->getClientOriginalExtension();
+        $filename = time() . "." . $ext;
+        $filepath = "storage/images/";
+        $file->move($filepath,$filename);
+        $movie->fiche = $filepath.$filename;
+        $movie->titre = $request->titre;
+        $movie->dPub = $request->datepub;
+        $movie->save();
+        return redirect(route("movie.index"));
     }
 
     /**
@@ -55,9 +67,10 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movie $movie)
+    public function edit($id)
     {
-        //
+        $movie = Movie::find($id);
+        return view('movie.update', ['movie' => $movie]);
     }
 
     /**
@@ -67,9 +80,20 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, $id)
     {
-        //
+        $movie = Movie::find($id);
+
+        $file = $request->image;
+        $ext = $file->getClientOriginalExtension();
+        $filename = time() . "." . $ext;
+        $filepath = "storage/images/";
+        $file->move($filepath,$filename);
+        $movie->fiche = $filepath.$filename;
+        $movie->titre = $request->titre;
+        $movie->dPub = $request->datepub;
+        $movie->save();
+        return redirect(route("movie.index"));
     }
 
     /**
@@ -78,8 +102,9 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy($id)
     {
-        //
+        Movie::destroy($id);
+        return redirect(route("movie.index"));
     }
 }

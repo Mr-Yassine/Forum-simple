@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\comment;
 use Illuminate\Http\Request;
+use App\Models\Movie;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -12,9 +14,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(){
+
+        $listes=Movie::all();
+        return view('movie.gallery',['movies'=>$listes]);
+        // echo 'hhh';
+        
     }
 
     /**
@@ -35,7 +40,12 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment=new Comment();
+        $comment->user_id=Auth::user()->id;
+        $comment->movie_id=$request->movie_id;
+        $comment->message=$request->message;
+        $comment->save();
+        return redirect(route("comment.show",$request->movie_id));
     }
 
     /**
@@ -44,9 +54,10 @@ class CommentController extends Controller
      * @param  \App\Models\comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(comment $comment)
+    public function show($id)
     {
-        //
+        $movie=Movie::find($id);
+        return view('movie.content',['movie'=>$movie]);
     }
 
     /**
@@ -55,9 +66,10 @@ class CommentController extends Controller
      * @param  \App\Models\comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(comment $comment)
+    public function edit($id)
     {
-        //
+        $comment = Comment::find($id);
+        return view('movie.cUpdate', ['comment' => $comment]);
     }
 
     /**
@@ -67,9 +79,13 @@ class CommentController extends Controller
      * @param  \App\Models\comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+
+        $comment->message=$request->message;
+        $comment->save();
+        return redirect(route("comment.show",$request->post_id));
     }
 
     /**
@@ -78,8 +94,9 @@ class CommentController extends Controller
      * @param  \App\Models\comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(comment $comment)
+    public function destroy($id)
     {
-        //
+        Comment::destroy($id);
+        return back();
     }
 }
