@@ -22,7 +22,7 @@
 
 
           {{-- <h4><span style="font-size: 15px">{{$comment->created_at}}</span></h4> --}}
-          <div class="content d-flex justify-content-between align-items-center">
+          <div class="content d-flex justify-content-between align-items-end">
             <h4 class="pt-4 mx-5" style="font-weight: lighter;" >{{$comment->message}}</h4>
             {{-- {{ $commentaire->user_id }} --}}
             @auth
@@ -30,10 +30,10 @@
             @if ($comment->user_id==Auth::user()->id)
             
                 <form action="{{route('comment.update',$comment->id)}}" method="post">
-                  <a href="{{route('comment.edit',$comment->id)}}" class="btn btn-primary">Edit</a>
+                  <a href="{{route('comment.edit',$comment->id)}}" ><i class="fas fa-edit"></i></a>
                   @csrf
                   <input type="hidden" name="_method" value="DELETE">
-                  <button type="submit" class="btn btn-danger">Delete</button>
+                  <a type="submit" ><i class="fas fa-trash-alt" style="color: red"></i></a>
                 </form>
 
             @endif
@@ -68,7 +68,11 @@
   </div>
 @endsection
 
-
+<script src="https://kit.fontawesome.com/6f17665668.js" crossorigin="anonymous"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+
+  form i {
+    font-size: 26px
+  }
 </style>

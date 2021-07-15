@@ -47,7 +47,7 @@ class MovieController extends Controller
         $file = $request->image;
         $ext = $file->getClientOriginalExtension();
         $filename = time() . "." . $ext;
-        $filepath = "storage/images/";
+        $filepath = "images/";
         $file->move($filepath,$filename);
         $movie->fiche = $filepath.$filename;
         $movie->titre = $request->titre;
@@ -93,7 +93,7 @@ class MovieController extends Controller
         $file = $request->image;
         $ext = $file->getClientOriginalExtension();
         $filename = time() . "." . $ext;
-        $filepath = "storage/images/";
+        $filepath = "images/";
         $file->move($filepath,$filename);
         $movie->fiche = $filepath.$filename;
         $movie->titre = $request->titre;

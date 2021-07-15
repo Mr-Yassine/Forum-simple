@@ -5,7 +5,7 @@
       @auth
       <div class="col">
           <div >
-              <a href="{{route('movie.create')}}" class="btn btn-dark m-4">New Movies</a>
+              <a href="{{route('movie.create')}}" class="btn btn-dark m-4">New Movies &nbsp;<i class="fa fa-plus" aria-hidden="true"></i></a>
           </div>
         <table class="table text-center">
             <thead>
@@ -24,10 +24,10 @@
                     <td>{{$row->dPub}}</td>
                     <td>
                         <form action="{{route('movie.destroy',$row->id)}}" method="post">
-                            <a href="{{route('movie.edit',$row->id)}}" class="btn btn-primary">Edit</a>
+                            <a href="{{route('movie.edit',$row->id)}}"><i class="fas fa-edit"></i></a>
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a type="submit"><i class="fas fa-trash-alt" style="color: red"></i></a>
                         </form>
 
                     </td>
@@ -42,3 +42,10 @@
     </div>
   </div>
 @endsection
+
+<script src="https://kit.fontawesome.com/6f17665668.js" crossorigin="anonymous"></script>
+<style>
+  form i {
+    font-size: 26px
+  }
+</style>

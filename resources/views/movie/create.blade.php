@@ -17,7 +17,10 @@
                 <label  class="form-label">Date de Pub</label>
                 <input type="date" name="datepub" class="form-control" >
               </div>
-              <button type="submit" class="btn btn-dark col-12">Save</button>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary col-2">Submit</button>
+              </div>
           </form>
       </div>
     </div>
