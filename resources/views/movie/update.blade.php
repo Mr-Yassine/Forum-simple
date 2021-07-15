@@ -18,9 +18,21 @@
                 <label  class="form-label">Date de Pub</label>
                 <input type="date" name="datepub" class="form-control" value="{{$movie->dPub}}" >
               </div>
-              <button type="submit" class="btn btn-dark col-12">Update</button>
+
+              <div class="text-center">
+              <button type="submit" class="btn btn-dark col-12" style="width: 20vw;">Update</button>
+              </div>
           </form>
       </div>
     </div>
   </div>
 @endsection
+
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+
+  label {
+    font-family: 'Otomanopee One', sans-serif;"
+  }
+</style>

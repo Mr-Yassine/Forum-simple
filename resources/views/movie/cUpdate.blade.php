@@ -10,8 +10,10 @@
             <div class="mb-3">
                 <input type="hidden" name="comment_id" value="{{ $comment->id }}">
                 <input type="hidden" name="post_id" value="{{ $comment->movie->id }}">
-                <input type="text" class="form-control"  value="{{ $comment->message }}" name="message">
-                <input class="btn btn-dark " type="submit" value="add" > 
+                <div class="d-flex" style="width: 80vw">
+                    <input type="text" class="form-control"  value="{{ $comment->message }}" name="message"> &nbsp;&nbsp;
+                    <input class="btn btn-dark " type="submit" value="Edit" > 
+                </div>
             </div>
         </form>
 

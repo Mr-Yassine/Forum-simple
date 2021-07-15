@@ -8,24 +8,27 @@
       </div>
       <div class="col-8">
           
-        <h1 >{{$movie->titre}}</h1>
-        <h3>{{$movie->dPub}}</h3>
+        <h1 style="font-family: 'Otomanopee One', sans-serif;">{{$movie->titre}}</h1>
+        <h3 style="font-size: 16px">{{$movie->dPub}}</h3>
 
       </div>
     </div>
     <div class="row mt-5">
 
       <div class="col-12">
-        <h3 >Comments</h3>
+        <h3 style="font-family: 'Otomanopee One', sans-serif;">Comments</h3>
         @foreach ($movie->comments() as $comment)
-        <div class="">
-          <h4><span style="font-size: 15px">{{$comment->created_at}}</span></h4>
-          <div class="content d-flex justify-content-between">
-            <h4 class="pt-1 mx-5" >{{$comment->message}}</h4>
+        <div class="" style="width: 90vw; margin: 0 auto;">
+
+
+          {{-- <h4><span style="font-size: 15px">{{$comment->created_at}}</span></h4> --}}
+          <div class="content d-flex justify-content-between align-items-center">
+            <h4 class="pt-4 mx-5" style="font-weight: lighter;" >{{$comment->message}}</h4>
             {{-- {{ $commentaire->user_id }} --}}
             @auth
+            
             @if ($comment->user_id==Auth::user()->id)
-
+            
                 <form action="{{route('comment.update',$comment->id)}}" method="post">
                   <a href="{{route('comment.edit',$comment->id)}}" class="btn btn-primary">Edit</a>
                   @csrf
@@ -55,8 +58,8 @@
       <form action="{{route('comment.store')}}" class="d-flex justify-content-center" method="post">
         @csrf
         <input type="hidden" name="movie_id" value="{{$movie->id}}">
-        <input type="text" class="form-control" name="message">
-        <input class="btn btn-dark " type="submit" value="add" > 
+        <input type="text" class="form-control" name="message"> &nbsp;&nbsp;
+        <input class="btn btn-dark " type="submit" value="Submit" > 
       </form>
     </div>
   </div>
@@ -64,3 +67,8 @@
 
   </div>
 @endsection
+
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+</style>

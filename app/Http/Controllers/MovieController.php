@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -14,8 +15,13 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $listes = Movie::all();
-        return view('movie.index', ['movies' => $listes]);
+        if(Auth::user()->Role=="Admin"){
+            $listes = Movie::all();
+            return view('movie.index', ['movies' => $listes]);
+        }
+        else {
+            return redirect(route("comment.index"));
+        }
     }
 
     /**
